@@ -1,0 +1,42 @@
+{% extends 'vacancy/base_mycompany.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+
+      <div class="col-12 col-lg-8">
+        <div class="card">
+          <div class="card-body px-4 pb-4 tab-content">
+            <!-- Tab -->
+            <section>
+              <h2 class="h4 pt-2 pb-3">Информация о вакансии</h2>
+                <div class="row">
+                  <div class="col-12 col-md-6">
+                    <div class="form-group pb-2">
+                      <form action="" method="post">
+                          {% csrf_token %}
+                          {{ form|crispy }}
+                          <input type="submit" class="btn btn-info" value="Сохранить">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              <!-- END Vacancy info -->
+              <!-- Applications -->
+              <h2 class="h4 pt-2 pb-3">Отклики - {{ Vacancy.application_count }}</h2>
+              {% for application in applications %}
+              <div class="card mt-3">
+                <div class="card-body px-4">
+                  <p class="mb-1 font-weight-bold">{{ application.username }}</p>
+                  <p class="mb-2"><a href="tel:+79002842324" class="text-dark">{{ application.phone }}</a></p>
+                  <p class="mb-1">{{ application.cover_letter }}</p>
+                </div>
+              </div>
+              {% endfor %}
+            </section>
+            <!-- END Tab -->
+          </div>
+        </div>
+      </div>
+
+{% endblock %}
